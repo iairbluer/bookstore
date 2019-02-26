@@ -13,7 +13,13 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var book = new Book(req.body);
-  book.user = req.user;
+  book.title = req.body.title;
+  book.description = req.body.description;
+  book.publicationDate = req.body.publicationDate;
+  book.author = req.body.author;
+  book.ISBN = req.body.ISBN;
+  book.genre = req.body.genre;
+  book.price = req.body.price;
 
   book.save(function (err) {
     if (err) {
@@ -45,9 +51,16 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var book = req.book;
-
   book.title = req.body.title;
   book.description = req.body.description;
+  book.publicationDate = req.body.publicationDate;
+  book.author = req.body.author;
+  book.ISBN = req.body.ISBN;
+  book.genre = req.body.genre;
+  book.price = req.body.price;
+
+
+
 
   book.save(function (err) {
     if (err) {

@@ -1,31 +1,82 @@
 <section>
   <div class="page-header">
     <h1>
-      {{ vm.book.title }}
+      Book Details
       <a class="btn btn-primary pull-right" data-ui-sref="books.edit({ bookId: vm.book._id })">
         <i class="glyphicon glyphicon-edit"></i>
       </a>
+      <a class="btn btn-primary pull-right" ui-sref="books.list">
+        Back
+      </a>
     </h1>
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.book.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.book.user" ng-bind="vm.book.user.displayName"></span>
-      <span ng-if="!vm.book.user">Deleted User</span>
-      , Book Author
-      <span ng-bind="vm.book.author"></span>
-      , Publication date
-      <span ng-bind="vm.book.publicationDate | date:'mediumDate'"></span>
-      , genre
-      <span ng-bind="vm.book.genre"></span>
-      , ISBN
-      <span ng-bind="vm.book.ISBN"></span>
-
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.book.description"></p>
-  <p class="lead">Price : {{ vm.book.price }} $</p>
-
+  <div class="container">
+      <div class="row">
+          <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+              <div class="row">
+                  <div class="text-center">
+                      <h1>{{ vm.book.title }}</h1>
+                      <h3>{{ vm.book.description }}</h3>
+                      <small>
+                        <em class="text-muted">
+                          Posted on
+                          <span ng-bind="vm.book.created | date:'mediumDate'"></span>
+                        </em>
+                      </small>
+                  </div>
+                  </span>
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>Details</th>
+                              <!-- <th>#</th> -->
+                              <th class="text-center">Information</th>
+                              <!-- <th class="text-center">Total</th> -->
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td class="col-md-6"><em>Author</em></h4></td>
+                              <!-- <td class="col-md-1" style="text-align: center"> 2 </td> -->
+                              <td class="col-md-6 text-center">{{vm.book.author}}</td>
+                              <!-- <td class="col-md-1 text-center">$26</td> -->
+                          </tr>
+                          <tr>
+                              <td class="col-md-6"><em>Publication Date</em></h4></td>
+                              <!-- <td class="col-md-1" style="text-align: center"> 1 </td> -->
+                              <td class="col-md-6 text-center">{{vm.book.publicationDate | date:'mediumDate'}}</td>
+                              <!-- <td class="col-md-1 text-center">$8</td> -->
+                          </tr>
+                          <tr>
+                              <td class="col-md-9"><em>Genre</em></h4></td>
+                              <!-- <td class="col-md-1" style="text-align: center"> 3 </td> -->
+                              <td class="col-md-1 text-center">{{ vm.book.genre }}</td>
+                              <!-- <td class="col-md-1 text-center">$48</td> -->
+                          </tr>
+                          <tr>
+                              <td>   </td>
+                              <td>   </td>
+                              <td class="text-right">
+                                <p>
+                                    <strong>ISBN: </strong>
+                                </p>
+                             </td>
+                              <td class="text-center">
+                              <p>
+                                  <strong>{{vm.book.ISBN}}</strong>
+                              </p>
+                             </td>
+                          </tr>
+                          <tr>
+                              <td>   </td>
+                              <td>   </td>
+                              <td class="text-right"><h4><strong>Price: </strong></h4></td>
+                              <td class="text-center text-danger"><h4><strong>{{vm.book.price}}$</strong></h4></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </td>
+              </div>
+          </div>
+      </div>
 </section>

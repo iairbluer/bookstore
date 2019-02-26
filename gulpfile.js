@@ -82,7 +82,7 @@ gulp.task('watch', function () {
   gulp.watch(defaultAssets.server.allJS, gulp.series('eslint')).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.client.js, gulp.series('eslint')).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.client.css, gulp.series('csslint')).on('change', plugins.refresh.changed);
-  gulp.watch(defaultAssets.client.sass, gulp.series('sass', 'csslint')).on('change', plugins.refresh.changed);
+  // gulp.watch(defaultAssets.client.sass, gulp.series('sass', 'csslint')).on('change', plugins.refresh.changed);
   gulp.watch(defaultAssets.client.less, gulp.series('less', 'csslint')).on('change', plugins.refresh.changed);
 
   if (process.env.NODE_ENV === 'production') {
@@ -173,12 +173,12 @@ gulp.task('cssmin', function () {
 });
 
 // Sass task
-gulp.task('sass', function () {
-  return gulp.src(defaultAssets.client.sass)
-    .pipe(plugins.sass())
-    .pipe(plugins.autoprefixer())
-    .pipe(gulp.dest('./modules/'));
-});
+// gulp.task('sass', function () {
+//   return gulp.src(defaultAssets.client.sass)
+//     .pipe(plugins.sass())
+//     .pipe(plugins.autoprefixer())
+//     .pipe(gulp.dest('./modules/'));
+// });
 
 // Less task
 gulp.task('less', function () {
@@ -461,7 +461,7 @@ gulp.task('protractor', gulp.series('webdriver_update', function (done) {
 
 // Lint CSS and JavaScript files.
 gulp.task('lint',
-  gulp.parallel('less', 'sass', gulp.series('csslint', 'eslint')));
+  gulp.parallel('less', gulp.series('csslint', 'eslint')));
 
 // Lint project files and minify them into two production files.
 gulp.task('build',

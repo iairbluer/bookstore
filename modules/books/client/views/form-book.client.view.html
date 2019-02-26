@@ -4,10 +4,10 @@
       <div class="col-md-4">
         <h1>{{vm.book._id ? 'Edit Book' : 'New Book'}}</h1>
       </div>
-      <a ng-show="vm.book._id" class="btn btn-primary" ng-click="vm.remove()">
+      <a ng-show="vm.book._id" class="btn btn-primary pull-right" ng-click="vm.remove()">
         <i class="glyphicon glyphicon-trash"></i>
       </a>
-      <a class="btn btn-primary" ui-sref="books.list">
+      <a class="btn btn-primary pull-right" ui-sref="books.list">
         Back
       </a>
     </div>

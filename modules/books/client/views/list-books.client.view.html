@@ -1,0 +1,37 @@
+﻿<section>
+    
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Books</h1>
+      </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
+      </div>
+      <a class="btn btn-primary pull-right" data-ui-sref="books.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+  </div>
+  <div ng-show="!vm.books.$resolved" class="text-center">
+    <img src="/modules/core/client/img/loaders/loader.gif">
+  </div>
+  <div class="list-group" ng-show="vm.books.$resolved">
+    <a data-ng-repeat="book in vm.pagedItems" data-ui-sref="books.view({bookId: book._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="book.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="book.user" ng-bind="book.user.displayName"></span>
+        <span ng-if="!book.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="book.title"></h4>
+      <p class="list-group-item-text" data-ng-bind="book.description"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.books.$resolved && !vm.books.length">
+    No books yet, why don't you <a data-ui-sref="books.create">create one</a>?
+  </div>
+
+  <uib-pagination  ng-show="vm.books.$resolved" boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+</section>

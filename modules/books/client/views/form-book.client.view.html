@@ -1,0 +1,77 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.book._id ? 'Edit Book' : 'New Book'}}</h1>
+  </div>
+  <div class="pull-right">
+    <a ng-show="vm.book._id" class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+    <a class="btn btn-primary" ui-sref="books.list">
+      Back
+    </a>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.bookForm" class="form-horizontal" ng-submit="vm.save(vm.form.bookForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.book.title" id="title" class="form-control" placeholder="Title" required autofocus>
+          <div ng-messages="vm.form.bookForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">book title is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="description">description</label>
+          <textarea name="description" data-ng-model="vm.book.description" id="description" class="form-control" cols="30" rows="10" placeholder="description" required autofocus></textarea>
+          <div ng-messages="vm.form.bookForm.description.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">book description is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="author">Author</label>
+          <input name="author" type="text" ng-model="vm.book.author" id="author" class="form-control" placeholder="author" required autofocus>
+          <div ng-messages="vm.form.bookForm.author.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">book author is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="genre">Genre</label>
+          <select name="genre" id="genre" ng-model="vm.book.genre" class="form-control form-control-selectpicker" placeholder="genre" required autofocus>
+            <option ng-repeat="genre in vm.genres" value="{{genre}}">{{genre}}</option>
+          </select>
+          <div ng-messages="vm.form.bookForm.genre.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">book genre is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="publicationDate">Publication Date</label>
+          <input name="publicationDate" type="date" ng-model="vm.book.publicationDate" id="publicationDate" class="form-control" placeholder="publicationDate" required autofocus>
+          <div ng-messages="vm.form.bookForm.publicationDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">book publication Date is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="ISBN">ISBN</label>
+          <input name="ISBN" type="number" ng-model="vm.book.ISBN" id="ISBN" class="form-control" placeholder="ISBN" required autofocus>
+          <div ng-messages="vm.form.bookForm.ISBN.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">book ISBN is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="price">Price</label>
+          <input name="price" type="number" ng-model="vm.book.price" id="price" class="form-control" placeholder="price" required autofocus>
+          <div ng-messages="vm.form.bookForm.price.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">book price is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.book._id ? 'Update' : 'Create'}}</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

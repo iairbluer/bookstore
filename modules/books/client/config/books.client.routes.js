@@ -1,0 +1,75 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('books.routes')
+    .config(routeConfig);
+
+  routeConfig.$inject = ['$stateProvider'];
+
+  function routeConfig($stateProvider) {
+    $stateProvider
+      .state('books', {
+        abstract: true,
+        url: '/books',
+        template: '<ui-view/>'
+      })
+      .state('books.create', {
+        url: '/create',
+        templateUrl: '/modules/books/client/views/form-book.client.view.html',
+        controller: 'BooksController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['guest','user'],
+        },
+        resolve: {
+          bookResolve: newBook
+        }
+      })
+      .state('books.edit', {
+        url: '/:bookId/edit',
+        templateUrl: '/modules/books/client/views/form-book.client.view.html',
+        controller: 'BooksController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['guest','user'],
+          pageTitle: '{{ bookResolve.title }}'
+        },
+        resolve: {
+          bookResolve: getBook
+        }
+      })
+      .state('books.list', {
+        url: '',
+        templateUrl: '/modules/books/client/views/list-books.client.view.html',
+        controller: 'BooksListController',
+        controllerAs: 'vm'
+      })
+      .state('books.view', {
+        url: '/:bookId',
+        templateUrl: '/modules/books/client/views/view-book.client.view.html',
+        controller: 'BooksController',
+        controllerAs: 'vm',
+        resolve: {
+          bookResolve: getBook
+        },
+        data: {
+          roles: ['guest','user'],
+          pageTitle: '{{ bookResolve.title }}'
+        }
+      });
+  }
+
+  getBook.$inject = ['$stateParams', 'BooksService'];
+
+  function getBook($stateParams, BooksService) {
+    return BooksService.get({
+      bookId: $stateParams.bookId
+    }).$promise;
+  }
+  newBook.$inject = ['BooksService'];
+
+  function newBook(BooksService) {
+    return new BooksService();
+  }
+}());

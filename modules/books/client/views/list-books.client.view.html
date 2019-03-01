@@ -14,23 +14,49 @@
     </div>
   </div>
   <div ng-show="!vm.books.$resolved" class="text-center">
-    <img src="/modules/core/client/img/loaders/loader.gif">
+      <div class="ui segment" style="margin-top:2em;">
+          <div class="ui active inverted dimmer">
+            <div class="ui large text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+          <p></p>
+        </div>
   </div>
-  <div class="list-group" ng-show="vm.books.$resolved">
-    <a data-ng-repeat="book in vm.pagedItems" data-ui-sref="books.view({bookId: book._id})" class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="book.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="book.user" ng-bind="book.user.displayName"></span>
-        <span ng-if="!book.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="book.title"></h4>
-      <p class="list-group-item-text" data-ng-bind="book.description"></p>
-    </a>
+  <div class="list-group ui divided cards" ng-show="vm.books.$resolved">
+      <div class="ui card" style="width: 30%;" data-ng-repeat="book in vm.pagedItems">
+        <div class="content">
+              <a class="header" data-ui-sref="books.view({bookId: book._id})">{{ book.title }}</a>
+              <div class="meta">
+                By Author : 
+                <span class="cinema">{{ book.author }}</span>
+                , Publication Date:
+                <span class="cinema">{{ book.publicationDate | date:'mediumDate' }}</span>
+              </div>
+              <div class="description">
+                <p class="list-group-item-text" data-ng-bind="book.description"></p>
+              </div>
+              <div class="extra">
+                <div class="ui label">{{ book.genre }}</div>
+              </div>
+        </div>
+        <div class="ui bottom attached button" data-ui-sref="books.view({bookId: book._id})">
+          <i class="add icon"></i>
+          View Book Details
+        </div>
+      </div>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.books.$resolved && !vm.books.length">
-    No books yet, why don't you <a data-ui-sref="books.create">create one</a>?
+    <div class="ui placeholder segment">
+      <div class="ui icon header">
+        <i class="search icon"></i>
+        No books yet, why don't you...
+      </div>
+      <div class="inline">
+        <div class="ui button" data-ui-sref="books.create">Create One</div>
+      </div>
+    </div>
+    <!-- No books yet, why don't you <a data-ui-sref="books.create">create one</a>? -->
   </div>
 
   <uib-pagination  ng-show="vm.books.$resolved" boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
